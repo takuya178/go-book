@@ -90,5 +90,80 @@ func main() {
 
 	// 実行してみればスライスのサイズがどのくらいになるか予想ができるが、プログラムを書いている最中にはわからない場合にはmakeを使う
 
+	
+	// 配列からスライスへの変換
+	sliceArX := [...]int{5, 6, 7, 8}
+	sliceArY := sliceArX[:2]
+	sliceArZ := sliceArX[2:]
+	sliceArD := sliceArX[:]
+	sliceArX[0] = 10
+	
+	fmt.Println(sliceArX)
+	fmt.Println(sliceArY)
+	fmt.Println(sliceArZ)
+	fmt.Println(sliceArD)
 
+	
+	// メモリを共有しない独立したスライスの作成
+	memoX := []int{1,2,3,4}
+	memoY := make([]int, 4)
+	num := copy(memoY, memoX)
+	fmt.Println(memoY, num)
+
+	x := []int{1,2,3,4,5}
+	num := copy(x[:3], x[1:])
+	
+
+	// マップリテラル
+	totalWins := map[string]int{}
+	// 空のマップリテラルで初期化すると、そのマップに対して読み書きの両方が可能になる
+	fmt.Println(totalWins == nul)
+	fmt.Println(totalWins["abc"]) // 0
+	totalWins["abc"] = 3;
+	fmt.Println(totalWins["abc"]);
+	
+	teams := map[string][]string {
+		"ライターズ": []string{"夏目", "森", "国木田"},
+		"ナイツ": []string{"武田", "徳川", "明智"},
+		"ミュージシャンズ": []string{"ラベル", "ベートーベン", "リスト"},
+	}
+	
+
+	m := map[string]int{
+		"hello": 5,
+		"world": 0,
+	}
+
+	v, ok := m["hello"]
+	fmt.Println(v, ok) // 5 true
+	v, ok = m["world"]
+	fmt.Println(v, ok) // 0 true
+	v, ok = m["goodbye"]
+	fmt.Println(v, ok) // 0 false
+	
+	var maps := map[int]bool{}
+	var vals := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	for _, val := range vals {
+		maps[val] = true
+	}
+
+	// mapは「APIを定義しない」。特定のキーだけを含むような「限定されたマップ」の定義ができないということ
+
+	// struct
+	type person struct {
+		name string
+		age int
+		pet string
+	}
+	var fred person
+	bob := person{} // 構造体リテラル。全フィールドがゼロ値で初期化される
+	julia := person{
+		"ジュリア"
+		40,
+		"cat"
+	}
+	beth := person{
+		age: 30,
+		name: "ベス",
+	}
 }
